@@ -1,8 +1,6 @@
 package com.example.ecommerceapp.registration
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,24 +19,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.ecommerceapp.R
 
+
 @Composable
-fun SignUpScreen(modifier: Modifier = Modifier, navController: NavController) {
+fun LoginScreen(modifier: Modifier = Modifier,navController: NavController) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var fullName by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -49,7 +45,7 @@ fun SignUpScreen(modifier: Modifier = Modifier, navController: NavController) {
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         Text(
-            text = "Hi there!",
+            text = "Welcome back!",
             style = TextStyle(
                 fontSize = 25.sp,
                 fontFamily = FontFamily.Monospace,
@@ -58,7 +54,7 @@ fun SignUpScreen(modifier: Modifier = Modifier, navController: NavController) {
             modifier = Modifier.fillMaxWidth()
         )
         Text(
-            text = "Create your account",
+            text = "Sign in your account",
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -68,7 +64,7 @@ fun SignUpScreen(modifier: Modifier = Modifier, navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp),
-            contentDescription = "sign uo banner"
+            contentDescription = "login banner"
         )
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -76,14 +72,6 @@ fun SignUpScreen(modifier: Modifier = Modifier, navController: NavController) {
             email = it
         }, label = {
             Text("Email")
-        }, modifier = Modifier.fillMaxWidth())
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        OutlinedTextField(value = fullName, onValueChange = {
-            fullName = it
-        }, label = {
-            Text("Full Name")
         }, modifier = Modifier.fillMaxWidth())
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -106,12 +94,8 @@ fun SignUpScreen(modifier: Modifier = Modifier, navController: NavController) {
                 .fillMaxWidth()
                 .height(60.dp)
         ) {
-            Text("Create account")
+            Text("Login")
         }
 
-        Spacer(modifier = Modifier.height(10.dp))
-        TextButton(onClick = { navController.navigate("login") }) {
-            Text("Have an account, login")
-        }
     }
 }

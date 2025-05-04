@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             EcommerceAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
+                    AppNavigation(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
