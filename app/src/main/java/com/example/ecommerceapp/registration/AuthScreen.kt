@@ -25,9 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.ecommerceapp.R
+import com.example.ecommerceapp.viewmodel.AuthViewModel
 
 @Composable
-fun AuthScreen(modifier: Modifier = Modifier,navController: NavController) {
+fun AuthScreen(modifier: Modifier = Modifier,navController: NavController,authViewModel: AuthViewModel) {
 
     Column(modifier = Modifier
         .fillMaxSize()
