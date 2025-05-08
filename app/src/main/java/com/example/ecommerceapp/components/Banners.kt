@@ -35,13 +35,14 @@ fun Banners(modifier: Modifier = Modifier) {
             bannerList = it.result.get("urls") as List<String>
         }
     }
-
     Column(modifier) {
         val pagerState = rememberPagerState(0) { bannerList.size }
         HorizontalPager(
             state = pagerState,
             pageSpacing = 24.dp
         ) {
+
+            System.out.println("bannerList: $bannerList")
             AsyncImage(
                 model = bannerList[it],
                 contentDescription = "banner",
