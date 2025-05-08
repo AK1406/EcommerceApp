@@ -2,10 +2,12 @@ package com.example.ecommerceapp
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.ecommerceapp.home.HomeScreen
+import com.example.ecommerceapp.navScreens.CategoryProductScreen
 import com.example.ecommerceapp.registration.AuthScreen
 import com.example.ecommerceapp.registration.LoginScreen
 import com.example.ecommerceapp.registration.SignUpScreen
@@ -18,7 +20,7 @@ fun AppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel) {
     val isLoggedIn = Firebase.auth.currentUser != null
     val firstScreen = if (isLoggedIn) "home" else "auth"
     val navController = rememberNavController()
-
+    GlobalNavigation.navController = navController
     NavHost(navController = navController, startDestination = firstScreen, builder = {
         composable("auth") {
             AuthScreen(modifier, navController, authViewModel)
@@ -33,5 +35,14 @@ fun AppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel) {
         composable("home") {
             HomeScreen(modifier, navController, authViewModel)
         }
+
+        composable("category-product/{categoryId}") {
+            val catId = it.arguments?.getString("categoryId")
+            CategoryProductScreen(modifier,catId?:"")
+        }
     })
+}
+
+object GlobalNavigation{
+    lateinit var navController: NavController
 }
