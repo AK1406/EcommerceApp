@@ -7,13 +7,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.ecommerceapp.home.HomeScreen
+import com.example.ecommerceapp.model.ProductModel
 import com.example.ecommerceapp.navScreens.CategoryProductScreen
+import com.example.ecommerceapp.navScreens.ProductDetailScreen
 import com.example.ecommerceapp.registration.AuthScreen
 import com.example.ecommerceapp.registration.LoginScreen
 import com.example.ecommerceapp.registration.SignUpScreen
 import com.example.ecommerceapp.viewmodel.AuthViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 
 @Composable
 fun AppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel) {
@@ -39,6 +42,12 @@ fun AppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel) {
         composable("category-product/{categoryId}") {
             val catId = it.arguments?.getString("categoryId")
             CategoryProductScreen(modifier,catId?:"")
+        }
+        composable("product-detail/{productId}") {
+            val productId = it.arguments?.getString("productId")
+            if (productId != null) {
+                ProductDetailScreen(modifier,productId)
+            }
         }
     })
 }

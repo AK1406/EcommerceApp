@@ -21,7 +21,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
 @Composable
-fun CategoryProductScreen(modifier: Modifier = Modifier.padding(20.dp),catId:String) {
+fun CategoryProductScreen(modifier: Modifier,catId:String) {
 
     val productList = remember { mutableStateOf<List<ProductModel>>(emptyList()) }
 
