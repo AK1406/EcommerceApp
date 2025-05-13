@@ -1,7 +1,5 @@
 package com.example.ecommerceapp.viewmodel
 
-import android.widget.Toast
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +8,7 @@ import com.example.ecommerceapp.model.UserModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
-import kotlin.math.truncate
+
 
 class AuthViewModel : ViewModel() {
     val auth: FirebaseAuth = FirebaseAuth.getInstance()
