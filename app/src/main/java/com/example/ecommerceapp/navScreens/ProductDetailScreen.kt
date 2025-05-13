@@ -29,12 +29,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.ecommerceapp.appUtils.AppUtils
 import com.example.ecommerceapp.model.ProductModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
@@ -47,9 +49,10 @@ fun ProductDetailScreen(modifier: Modifier = Modifier, productId: String) {
 
     var product by remember { mutableStateOf(ProductModel()) }
     var imageList by remember { mutableStateOf<List<String>>(emptyList()) }
-
+    val context = LocalContext.current
     LaunchedEffect(Unit) {
-        Firebase.firestore.collection("data").document("stocks").collection("products")
+        Firebase.firestore.collection("data").document("stocks")
+            .collection("products")
             .document("$productId").get().addOnCompleteListener {
                 product = it.result.toObject(ProductModel::class.java)!!
             }
@@ -119,7 +122,7 @@ fun ProductDetailScreen(modifier: Modifier = Modifier, productId: String) {
 
         Spacer(modifier = Modifier.height(10.dp))
         Button(
-            onClick = {},
+            onClick = { AppUtils.AddItemToCart(productId, context) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
