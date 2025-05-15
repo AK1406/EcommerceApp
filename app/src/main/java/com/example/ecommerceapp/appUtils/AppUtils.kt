@@ -35,7 +35,7 @@ object AppUtils {
         }
     }
 
-    fun RemoveItemFromCart(productId: String?, context: Context,removeAll : Boolean = false) {
+    fun RemoveItemFromCart(productId: String?, context: Context, removeAll: Boolean = false) {
         val userDoc = Firebase.firestore.collection("users")
             .document(FirebaseAuth.getInstance().currentUser?.uid!!)
 
@@ -57,5 +57,12 @@ object AppUtils {
                     }
             }
         }
+    }
+
+    fun getDiscountValue():Float{
+        return 10.78f
+    }
+    fun getTaxValue():Float{
+        return 50.65f
     }
 }

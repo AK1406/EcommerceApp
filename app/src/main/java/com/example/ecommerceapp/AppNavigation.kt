@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.ecommerceapp.home.HomeScreen
 import com.example.ecommerceapp.model.ProductModel
 import com.example.ecommerceapp.navScreens.CategoryProductScreen
+import com.example.ecommerceapp.navScreens.CheckoutScreen
 import com.example.ecommerceapp.navScreens.ProductDetailScreen
 import com.example.ecommerceapp.registration.AuthScreen
 import com.example.ecommerceapp.registration.LoginScreen
@@ -48,6 +49,9 @@ fun AppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel) {
             if (productId != null) {
                 ProductDetailScreen(modifier,productId)
             }
+        }
+        composable("checkout"){
+            CheckoutScreen(modifier)
         }
     })
 }
