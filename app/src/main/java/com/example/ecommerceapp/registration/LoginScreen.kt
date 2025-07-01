@@ -28,9 +28,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.ecommerceapp.AuthState
 import com.example.ecommerceapp.R
 import com.example.ecommerceapp.viewmodel.AuthViewModel
@@ -40,16 +42,16 @@ import com.example.ecommerceapp.viewmodel.AuthViewModel
 fun LoginScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
-    authViewModel: AuthViewModel
+    authViewModel: AuthViewModel? = null
 ) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    val authstate = authViewModel.authState.observeAsState()
+    val authstate = authViewModel?.authState?.observeAsState()
     val context = LocalContext.current
 
-    LaunchedEffect(authstate.value) {
-        when (authstate.value) {
+    LaunchedEffect(authstate?.value) {
+        when (authstate?.value) {
             is AuthState.Authenticated  -> {navController.navigate("home"){
             popUpTo("auth"){inclusive = true}
         }}
@@ -117,13 +119,24 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
-            onClick = { authViewModel.login(email, password) }, modifier = Modifier
+            onClick = { authViewModel?.login(email, password) }, modifier = Modifier
                 .fillMaxWidth()
                 .height(60.dp),
-            enabled = authstate.value != AuthState.Loader
+            enabled = authstate?.value != AuthState.Loader
         ) {
             Text("Login")
         }
 
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenPreview() {
+    val navController = rememberNavController()
+
+    LoginScreen(
+        navController = navController,
+        authViewModel = null
+    )
 }
